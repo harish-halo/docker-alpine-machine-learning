@@ -1,7 +1,7 @@
 docker-alpine-machine-learning
 ==============================
 
-[![Docker Automated build](https://img.shields.io/docker/automated/publysher/scikit-learn.svg)](https://hub.docker.com/r/publysher/scikit-learn/)
+[![Docker Automated build](https://img.shields.io/docker/automated/publysher/alpine-machine-learning.svg)](https://hub.docker.com/r/publysher/alpine-machine-learning/)
 
 A set of Alpine docker images containing the following packages:
 
