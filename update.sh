@@ -16,7 +16,7 @@ function build {
     cat <<-EOF > ${dir}/Dockerfile
 FROM python:${base}
 
-RUN apk --no-cache add lapack \
+RUN apk --no-cache add lapack libstdc++ \
     && apk --no-cache add --virtual builddeps g++ gfortran musl-dev lapack-dev \
     && pip install numpy \
     && pip install scipy \
