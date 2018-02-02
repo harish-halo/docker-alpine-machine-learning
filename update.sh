@@ -6,8 +6,10 @@ function build {
     SCIKIT=$3
     PANDAS=$4
 
-    dir="python-${PYTHON}/alpine-${ALPINE}/scikit-${SCIKIT}"
+    dir="python-${PYTHON}/alpine-${ALPINE}/scikit-${SCIKIT}/pandas-${PANDAS}"
     base="${PYTHON}-alpine${ALPINE}"
+    version="scikit${SCIKIT}-pandas${PANDAS}-python${PYTHON}-alpine${ALPINE}"
+    image="publysher/alpine-machine-learning:${version}"
 
     mkdir -p ${dir}
 
@@ -19,11 +21,15 @@ RUN apk --no-cache add lapack \
     && pip install numpy \
     && pip install scipy \
     && pip install scikit-learn==${SCIKIT} pandas==${PANDAS} \
-    && apk del builddeps
+    && apk del builddeps \
     && rm -rf /root/.cache
 EOF
 
-    docker build -t publysher/alpine-machine-learning:scikit${SCIKIT}-pandas${PANDAS}-python${PYTHON}-alpine${ALPINE} ${dir}
+    echo "/${dir}\t${image}" >> build-settings.txt
+
+    docker build -t ${image} ${dir}
+
+    cp ${dir}/Dockerfile Dockerfile     # overwrite root Dockerfile, which is used for `latest`
 }
 
 build 3.7 3.6 0.19.1 0.22.0
